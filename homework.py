@@ -168,7 +168,7 @@ def read_package(workout_type: str, data: Sequence[float]) -> Training:
     try:
         return traning_version[workout_type](*data)
     except KeyError:
-        raise ValueError(workout_type)
+        raise ValueError(f'Неверный тип тренировки: {workout_type}')
 
 
 def main(training: Training) -> None:
