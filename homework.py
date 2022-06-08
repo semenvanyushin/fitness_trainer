@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import ClassVar, Dict, Sequence, Type
+from typing import ClassVar, Sequence, Type
 
 
 @dataclass
@@ -18,7 +18,7 @@ class InfoMessage:
         'Ср. скорость: {speed:.3f} км/ч; '
         'Потрачено ккал: {calories:.3f}.')
 
-    def get_message(self: Dict) -> str:
+    def get_message(self) -> str:
         """Возвращает сообщение со статистикой тренировки."""
         return self.message.format(**asdict(self))
 
@@ -168,7 +168,7 @@ def read_package(workout_type: str, data: Sequence[float]) -> Training:
     try:
         return traning_version[workout_type](*data)
     except KeyError:
-        raise ValueError
+        raise ValueError(workout_type)
 
 
 def main(training: Training) -> None:
